@@ -5,7 +5,6 @@ import { FC } from "react";
 
 interface ResultsInterface {
   results: Record<string, string | number>[];
-  // setResults: (results: Record<string, string>[]) => void;
   setShowForm: (showForm: boolean) => void;
 }
 
@@ -17,7 +16,7 @@ const Results: FC<ResultsInterface> = ({ results, setShowForm }) => {
   return (
     <>
       <Flex>
-        <LevelOneHeader>Feedback Form</LevelOneHeader>
+        <LevelOneHeader>Feedback Results</LevelOneHeader>
         <Button onClick={handleClick}>Go back</Button>
       </Flex>
       <Chart />

@@ -6,7 +6,7 @@ import Results from "../src/components/Results";
 import { data } from "./data";
 
 const App = () => {
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(true);
   const [results, setResults] =
     useState<Record<string, string | number>[]>(data);
 
@@ -14,7 +14,7 @@ const App = () => {
     <AppWrapper>
       <Container>
         {showForm ? (
-          <Form />
+          <Form setResults={setResults} setShowForm={setShowForm} />
         ) : (
           <Results results={results} setShowForm={setShowForm} />
         )}

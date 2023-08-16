@@ -3,42 +3,19 @@ import { LevelOneHeader } from "../Text.styles";
 import Button from "../Button";
 import Input from "../Input";
 import TextArea from "../TextArea";
-import { useState } from "react";
+import { FC, useState } from "react";
 
-type Validate = (componentName: string, value: string | number) => void;
+interface FormInterface {
+  setResults: (results: Record<string, string | number>[]) => void;
+  setShowForm: (showForm: boolean) => void;
+}
 
-const Form = () => {
+const Form: FC<FormInterface> = ({ setResults, setShowForm }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [rating, setRating] = useState("");
   const [comment, setComment] = useState("");
-  const [error, setError] = useState<Record<string, string>>({});
-
-  const validate: Validate = (componentName, value) => {
-    let errorMessage!: string;
-    if (value === "") {
-      errorMessage = `The ${componentName} field is required`;
-      setError((prev) => ({ [componentName]: errorMessage, ...prev }));
-    }
-
-    if (
-      value &&
-      componentName === "email" &&
-      !(value as string).includes("@")
-    ) {
-      errorMessage = "A valid email is required";
-      setError((prev) => ({ [componentName]: errorMessage, ...prev }));
-    }
-
-    if (
-      value &&
-      componentName === "rating" &&
-      ((+value as number) > 5 || (+value as number) < 1)
-    ) {
-      errorMessage = "Ratings can only be from 1 to 5";
-      setError((prev) => ({ [componentName]: errorMessage, ...prev }));
-    }
-  };
+  const [hasError, setHasError] = useState(false);
 
   const handleChange = (
     e:
@@ -66,12 +43,20 @@ const Form = () => {
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const formValues: Record<string, string> = { name, email, rating, comment };
-    Object.keys(formValues).forEach((formValue) => {
-      validate(formValue, formValues[formValue]);
-    });
+    const formValues: Record<string, string | number> = {
+      name,
+      email,
+      rating: +rating,
+      comment,
+    };
+    const hasEmptyFields = Object.values(formValues).includes("");
+    setHasError(hasEmptyFields);
 
-    console.log(error);
+    if (!hasEmptyFields) {
+      // @ts-ignore
+      setResults((prev) => [...prev, formValues]);
+      setShowForm(false);
+    }
   };
 
   return (
@@ -83,7 +68,6 @@ const Form = () => {
             name="name"
             mb="1.2rem"
             onChange={handleChange}
-            error={error?.name}
             placeholder="Name"
             value={name}
           />
@@ -91,7 +75,6 @@ const Form = () => {
             name="email"
             mb="1.2rem"
             onChange={handleChange}
-            error={error?.email}
             placeholder="Email"
             value={email}
           />
@@ -99,7 +82,6 @@ const Form = () => {
             name="rating"
             mb="0"
             onChange={handleChange}
-            error={error?.rating}
             placeholder="Rating(1-5 stars)"
             value={rating}
           />
@@ -107,7 +89,6 @@ const Form = () => {
         <TextArea
           name="comment"
           onChange={handleChange}
-          error={error?.comment}
           placeholder="Comment"
           value={comment}
         />
@@ -115,6 +96,7 @@ const Form = () => {
       <ButtonWrapper>
         <Button onClick={handleClick}>Submit</Button>
       </ButtonWrapper>
+      {hasError && <ValidationError>All fields are required.</ValidationError>}
     </>
   );
 };
@@ -142,4 +124,8 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: end;
   margin-top: 1rem;
+`;
+
+const ValidationError = styled.p`
+  color: red;
 `;

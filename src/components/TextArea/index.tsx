@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { FC } from "react";
 
 interface TextAreaInterface {
-  error: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   name: string;
   placeholder: string;
@@ -10,7 +9,6 @@ interface TextAreaInterface {
 }
 
 const TextArea: FC<TextAreaInterface> = ({
-  error,
   onChange,
   name,
   placeholder,

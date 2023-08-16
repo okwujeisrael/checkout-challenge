@@ -3,7 +3,6 @@ import React, { FC } from "react";
 
 interface InputInterface {
   mb: string;
-  error: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name: string;
   placeholder: string;
@@ -12,7 +11,6 @@ interface InputInterface {
 
 const Input: FC<InputInterface> = ({
   mb,
-  error,
   onChange,
   name,
   placeholder,
@@ -27,7 +25,6 @@ const Input: FC<InputInterface> = ({
         name={name}
         value={value}
       />
-      {error && <ValidationError>{error}</ValidationError>}
     </InputWrapper>
   );
 };
@@ -60,11 +57,4 @@ const InputWrapper = styled.div<InputWrapperInterface>`
   @media only screen and (max-width: 500px) {
     margin-bottom: 2rem;
   }
-`;
-
-const ValidationError = styled.span`
-  display: inline-block;
-  margin-top: 0.5rem;
-  color: red;
-  font-size: 0.75rem;
 `;
