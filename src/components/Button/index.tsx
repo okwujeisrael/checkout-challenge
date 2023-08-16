@@ -1,13 +1,14 @@
 import styled from "styled-components";
-import { FC } from "react";
+import React, { FC } from "react";
 
 interface ButtonInterface {
   type: "button" | "link";
   children: string;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: FC<ButtonInterface> = ({ type, children }) => {
-  return <StyledButton>{children}</StyledButton>;
+const Button: FC<ButtonInterface> = ({ type, children, onClick }) => {
+  return <StyledButton onClick={onClick}>{children}</StyledButton>;
 };
 
 export default Button;
@@ -22,4 +23,8 @@ const StyledButton = styled.button`
   border-radius: 5px;
   border: none;
   font-weight: 600;
+
+  @media only screen and (max-width: 500px) {
+    width: 100%;
+  }
 `;

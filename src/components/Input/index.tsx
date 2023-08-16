@@ -1,11 +1,33 @@
 import styled, { css } from "styled-components";
-import { FC } from "react";
+import React, { FC } from "react";
 
-const Input: FC<{ marginBottom: string }> = ({ marginBottom }) => {
+interface InputInterface {
+  mb: string;
+  error: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  name: string;
+  placeholder: string;
+  value: string;
+}
+
+const Input: FC<InputInterface> = ({
+  mb,
+  error,
+  onChange,
+  name,
+  placeholder,
+  value,
+}) => {
   return (
-    <InputWrapper marginBottom={marginBottom}>
-      <StyledInput placeholder="input" type="text" />
-      <ValidationError>This is an error</ValidationError>
+    <InputWrapper mb={mb}>
+      <StyledInput
+        placeholder={placeholder}
+        type="text"
+        onChange={onChange}
+        name={name}
+        value={value}
+      />
+      {error && <ValidationError>{error}</ValidationError>}
     </InputWrapper>
   );
 };
@@ -23,17 +45,21 @@ const StyledInput = styled.input`
 `;
 
 interface InputWrapperInterface {
-  marginBottom: string;
+  mb: string;
 }
 
 const InputWrapper = styled.div<InputWrapperInterface>`
   margin-bottom: 1.2rem;
 
   ${(props) =>
-    props.marginBottom &&
+    props.mb &&
     css`
-      margin-bottom: ${props.marginBottom};
+      margin-bottom: ${props.mb};
     `}
+
+  @media only screen and (max-width: 500px) {
+    margin-bottom: 2rem;
+  }
 `;
 
 const ValidationError = styled.span`
