@@ -6,7 +6,7 @@ This project was bootstrapped using create react app and has deliberately been k
 - [x] For simplicity I also chose to use a simple pie chart from Recharts. Each rating that has been entered is aggregated and on hovering on any pie, you can see what allocation has been given to the pie.
 - [x] An integration test has been written for the application. If I'd had more time, I'd have written additional integration tests for the Chart and Form components, as well as unit tests for the atomic components.
 - [x] I haven't used any advanced state management libraries or the context API because I didn't think it was necessary for this simple application
-- [x] I have also chosen not to add any client side routing because of the limited timespan.
+- [x] I have also chosen not to add any client side routing because of the limited timespan to complete and I felt it wasn't really necessary for the app.
 
 ## Available Scripts
 
