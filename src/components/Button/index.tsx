@@ -2,12 +2,11 @@ import styled from "styled-components";
 import React, { FC } from "react";
 
 interface ButtonInterface {
-  type: "button" | "link";
   children: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: FC<ButtonInterface> = ({ type, children, onClick }) => {
+const Button: FC<ButtonInterface> = ({ children, onClick }) => {
   return <StyledButton onClick={onClick}>{children}</StyledButton>;
 };
 

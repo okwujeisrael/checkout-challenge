@@ -113,9 +113,7 @@ const Form = () => {
         />
       </Flex>
       <ButtonWrapper>
-        <Button type="button" onClick={handleClick}>
-          Submit
-        </Button>
+        <Button onClick={handleClick}>Submit</Button>
       </ButtonWrapper>
     </>
   );
