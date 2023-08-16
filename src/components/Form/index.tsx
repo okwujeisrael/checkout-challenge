@@ -5,8 +5,12 @@ import Input from "../Input";
 import TextArea from "../TextArea";
 import { FC, useState } from "react";
 
+type ResultUpdateType = (
+  prev: Record<string, string | number>[]
+) => Record<string, string | number>[];
+
 interface FormInterface {
-  setResults: (results: Record<string, string | number>[]) => void;
+  setResults: (results: ResultUpdateType) => void;
   setShowForm: (showForm: boolean) => void;
 }
 
@@ -53,8 +57,10 @@ const Form: FC<FormInterface> = ({ setResults, setShowForm }) => {
     setHasError(hasEmptyFields);
 
     if (!hasEmptyFields) {
-      // @ts-ignore
-      setResults((prev) => [...prev, formValues]);
+      setResults((prev: Record<string, string | number>[]) => [
+        ...prev,
+        formValues,
+      ]);
       setShowForm(false);
     }
   };

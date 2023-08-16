@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { PieChart, Pie, Tooltip, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Tooltip } from "recharts";
 
 interface ChartInterface {
   results: Record<string, string | number>[];
