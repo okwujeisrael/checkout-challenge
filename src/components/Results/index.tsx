@@ -2,6 +2,7 @@ import { LevelOneHeader } from "../Text.styles";
 import Button from "../Button";
 import styled from "styled-components";
 import { FC } from "react";
+import Chart from "../Chart";
 
 interface ResultsInterface {
   results: Record<string, string | number>[];
@@ -19,7 +20,7 @@ const Results: FC<ResultsInterface> = ({ results, setShowForm }) => {
         <LevelOneHeader>Feedback Results</LevelOneHeader>
         <Button onClick={handleClick}>Go back</Button>
       </Flex>
-      <Chart />
+      <Chart results={results} />
       <LevelTwoHeader>Latest comments</LevelTwoHeader>
       <CommentWrapper>
         {results.map((result) => (
@@ -43,12 +44,6 @@ const Flex = styled.div`
     flex-direction: column;
     margin-bottom: 2rem;
   }
-`;
-
-const Chart = styled.div`
-  width: 100%;
-  height: 200px;
-  background: red;
 `;
 
 const LevelTwoHeader = styled.h2`

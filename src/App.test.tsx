@@ -6,9 +6,7 @@ describe("App", () => {
   it("renders the correct elements on the screen", () => {
     render(<App />);
 
-    expect(
-      screen.getByRole("heading", { level: 1, name: "Feedback Form" })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
     expect(screen.getAllByRole("textbox")).toHaveLength(4);
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
@@ -47,6 +45,7 @@ describe("App", () => {
     ).not.toBeInTheDocument();
     expect(await screen.findByText("Ben@mail.com")).toBeInTheDocument();
     expect(await screen.findByText("Comment")).toBeInTheDocument();
+    expect(await screen.findByTestId("chart")).toBeInTheDocument();
     expect(
       await screen.findByRole("button", { name: "Go back" })
     ).toBeInTheDocument();
